@@ -25,9 +25,9 @@ authorized contributer via GNU Guix's
 mechanism.
 
 ``` bash
-git fetch keyring keyring:keyring
+git fetch origin keyring:keyring
 guix git authenticate \
-  'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' \
+  'd6390fea7840feec6dfdf29de700edfba50402e4' \
   'DACB 035F B9B0 EE9C 7E13  1AAA C310 15D9 6620 A955'
 ```
 
