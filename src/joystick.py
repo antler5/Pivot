@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 # %% Imports %%
+import copy
 import math
 from build123d import *
 from ocp_vscode import *
@@ -51,22 +52,23 @@ topGuide = Pos(0,0,acc(0) + topGuideOffset) * Rectangle(topGuideWidth, topGuideW
 # Gonna define a number of spheres for concave fingerpad cutouts
 fingerpadRadius = 80 # big and far away
 fingerpadOffset = fingerpadRadius - 0.25
+fingerpadShape = Sphere(fingerpadRadius)
 fingerpads = []
 
 # One for the top
-fingerpads += Pos(0,0,fingerpadOffset - 0.75) * Pos(topGuide.center()) * Sphere(fingerpadRadius)
+fingerpads = [Pos(0,0,fingerpadOffset - 0.75) * Pos(topGuide.center()) * copy.copy(fingerpadShape)]
 
-# One for each cardinal direction
-for i in range(4):
-  plane = Axis(Edge.make_line(
-                 topGuide.edges()[i].center(),
-                 bottomGuide.edges()[i].center()
-               )
-          ).to_plane()
-  if i > 1:
-    fingerpads += plane * Pos(-fingerpadOffset,0,0) * Sphere(fingerpadRadius)
-  else:
-    fingerpads += plane * Pos(fingerpadOffset,0,0) * Sphere(fingerpadRadius)
+# One for each side
+# Starting at the seam, then mirroring by 1/4-turns
+fingerpads += (
+  Axis(Edge.make_line(
+         topGuide.edges()[0].center(),
+         bottomGuide.edges()[0].center()
+       )).to_plane()
+  * Pos(fingerpadOffset,0,0)
+  * copy.copy(fingerpadShape))
+for i in range(1,4):
+  fingerpads += [fingerpads[-1].rotate(Axis.Z, 90)]
 
 joystick += joystickHead - fingerpads
 
