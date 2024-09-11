@@ -9,8 +9,8 @@ from ocp_vscode import *
 
 # %% Joystick
 switchStickWidth = 2
-switchStickHeight = 2
-baseWidth = 3.12
+switchStickHeight = 2.05
+baseWidth = 3.15
 baseHeight = 1
 
 stemLength = 11.5
@@ -71,8 +71,10 @@ for i in range(4):
 joystick += joystickHead - fingerpads
 
 # 5-Way switch slot (stick + base)
-joystick -= Pos(0,0,(baseHeight) / 2) * Cylinder(baseWidth/2,baseHeight)
-joystick -= Pos(0,0,(switchStickHeight + baseHeight) / 2) * Box(switchStickWidth, switchStickWidth, switchStickHeight + baseHeight)
+joystick -= [
+  Pos(0,0,(baseHeight) / 2) * Cylinder(baseWidth/2,baseHeight),
+  Rot(0,0,45) * Pos(0,0,(switchStickHeight + baseHeight) / 2) * Box(switchStickWidth, switchStickWidth, switchStickHeight + baseHeight)
+]
 
 show(joystick)
 
