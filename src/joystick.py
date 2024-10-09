@@ -1,5 +1,4 @@
 # SPDX-FileCopyrightText: 2024 antlers <antlers@illucid.net>
-
 # SPDX-License-Identifier: GPL-3.0-only
 
 # %% Imports %%
@@ -50,13 +49,13 @@ topGuideWidth = 2 * math.sqrt(abs(topGuideOffset**2 - headRadius**2))
 topGuide = Pos(0,0,acc(0) + topGuideOffset) * Rectangle(topGuideWidth, topGuideWidth)
 
 # Gonna define a number of spheres for concave fingerpad cutouts
-fingerpadRadius = 80 # big and far away
+fingerpadRadius = 60 # big and far away
 fingerpadOffset = fingerpadRadius - 0.25
 fingerpadShape = Sphere(fingerpadRadius)
 fingerpads = []
 
 # One for the top
-fingerpads = [Pos(0,0,fingerpadOffset - 0.75) * Pos(topGuide.center()) * copy.copy(fingerpadShape)]
+fingerpads = [Pos(0,0,fingerpadOffset - 5.75) * Pos(topGuide.center()) * Sphere(fingerpadRadius - 5)]
 
 # One for each side
 # Starting at the seam, then mirroring by 1/4-turns
