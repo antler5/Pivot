@@ -16,7 +16,7 @@ Low key-count, sans column-stagger and splay.
 ## Cloning and Authenticating
 
 ``` bash
-git clone 'https://github.com/antler5/Pivot' && cd Pivot
+git clone 'https://github.com/antler5/pivot' && cd pivot
 ```
 
 You may verify that each commit in this branch has been signed by an
